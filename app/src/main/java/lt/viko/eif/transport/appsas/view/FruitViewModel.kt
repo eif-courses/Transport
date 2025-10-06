@@ -24,12 +24,12 @@ class FruitViewModel(
 
         viewModelScope.launch {
 
-            state.copy(
+            // nebuvo priskirtas state objektui
+            state = state.copy(
                 fruits = fruitRepository.listFruits()
             )
         }
     }
-
 
 }
 
