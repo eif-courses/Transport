@@ -64,6 +64,12 @@ dependencies {
     implementation(libs.kotlinx.serialization.core)
 
 
+    // COIL IMAGE LOADER ASYNC
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+
 
     // Koin BOM
     implementation(project.dependencies.platform(libs.koin.bom))

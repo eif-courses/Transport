@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lt.viko.eif.transport.appsas.data.F1DriversRepository
 import lt.viko.eif.transport.appsas.data.F1DriversResponse
-import lt.viko.eif.transport.appsas.view.FruitState
 
 class DriversViewModel(private val repository: F1DriversRepository) : ViewModel() {
 

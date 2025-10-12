@@ -2,10 +2,7 @@ package lt.viko.eif.transport.appsas.data
 
 import com.squareup.moshi.Json
 import retrofit2.http.GET
-
-
-class Ret() {
-}
+import retrofit2.http.Query
 
 
 data class F1DriversResponse(
@@ -52,7 +49,8 @@ interface F1Api {
     //https://api.openf1.org/v1/drivers
 
     @GET("v1/drivers")
-    suspend fun getAllF1Drivers(): List<F1DriversResponse>
+    suspend fun getAllF1Drivers(@Query("driver_number") driverNumber: Int? = null,
+                                @Query("session_key") sessionKey: Int? = null): List<F1DriversResponse>
 
 
 }

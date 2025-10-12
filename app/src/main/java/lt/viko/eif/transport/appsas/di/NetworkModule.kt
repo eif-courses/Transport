@@ -5,18 +5,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import lt.viko.eif.transport.appsas.data.F1Api
 import lt.viko.eif.transport.appsas.data.F1DriversRepository
 import lt.viko.eif.transport.appsas.data.F1DriversRepositoryImpl
-import lt.viko.eif.transport.appsas.data.FruitRepository
-import lt.viko.eif.transport.appsas.data.FruitRepositoryImpl
-import lt.viko.eif.transport.appsas.view.FruitViewModel
 import lt.viko.eif.transport.appsas.view.drivers.DriversViewModel
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
-import java.util.concurrent.TimeUnit
+
 
 val networkModule = module {
 

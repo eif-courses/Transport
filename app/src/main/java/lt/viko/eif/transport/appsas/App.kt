@@ -1,7 +1,6 @@
 package lt.viko.eif.transport.appsas
 
 import android.app.Application
-import lt.viko.eif.transport.appsas.di.fruitModule
 import lt.viko.eif.transport.appsas.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -16,7 +15,6 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(
-                fruitModule,
                 networkModule
             )
         }
