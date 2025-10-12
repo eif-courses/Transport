@@ -8,24 +8,12 @@ import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.koinViewModel
 
 
-
-
-data class Person(val name: String, val age: Int)
-
-
-
-
 @Composable
 fun DriversList(viewModel: DriversViewModel = koinViewModel()) {
 
-
-    var d = Person("Marius", 24)
-
-    print(d)
-
     LazyColumn {
         items(viewModel.state.drivers) { driver ->
-            Text("VAISIUS: " + driver)
+            Text("VAISIUS: " + driver.driverNumber)
         }
     }
 }

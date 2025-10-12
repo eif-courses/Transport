@@ -1,50 +1,49 @@
 package lt.viko.eif.transport.appsas.data
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import retrofit2.http.GET
 
 
-
-class Ret(){
+class Ret() {
 }
 
 
 data class F1DriversResponse(
-    @SerializedName("broadcast_name")
-    val broadcastName: String,
+    @param:Json(name = "broadcast_name")
+    val broadcastName: String?,
 
-    @SerializedName("country_code")
-    val countryCode: String,
+    @param:Json(name = "country_code")
+    val countryCode: String?,
 
-    @SerializedName("driver_number")
+    @param:Json(name = "driver_number")
     val driverNumber: Int,
 
-    @SerializedName("first_name")
-    val firstName: String,
+    @param:Json(name = "first_name")
+    val firstName: String?,
 
-    @SerializedName("full_name")
-    val fullName: String,
+    @param:Json(name = "full_name")
+    val fullName: String?,
 
-    @SerializedName("headshot_url")
-    val headshotUrl: String,
+    @param:Json(name = "headshot_url")
+    val headshotUrl: String?,
 
-    @SerializedName("last_name")
-    val lastName: String,
+    @param:Json(name = "last_name")
+    val lastName: String?,
 
-    @SerializedName("meeting_key")
+    @param:Json(name = "meeting_key")
     val meetingKey: Int,
 
-    @SerializedName("name_acronym")
-    val nameAcronym: String,
+    @param:Json(name = "name_acronym")
+    val nameAcronym: String?,
 
-    @SerializedName("session_key")
+    @param:Json(name = "session_key")
     val sessionKey: Int,
 
-    @SerializedName("team_colour")
-    val teamColour: String,
+    @param:Json(name = "team_colour")
+    val teamColour: String?,
 
-    @SerializedName("team_name")
-    val teamName: String
+    @param:Json(name = "team_name")
+    val teamName: String?
 )
 
 
