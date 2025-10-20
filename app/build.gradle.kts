@@ -42,6 +42,11 @@ android {
 
 dependencies {
 
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+
     // Battle net api
     implementation(libs.androidx.browser) // For Custom Tabs
     //implementation(libs.appauth) // OAuth library

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import lt.viko.eif.transport.appsas.ui.theme.TransportTheme
 import lt.viko.eif.transport.appsas.view.FruitsList
+import lt.viko.eif.transport.appsas.view.drivers.DriverDetails
 import lt.viko.eif.transport.appsas.view.drivers.DriversList
 
 class MainActivity : ComponentActivity() {
@@ -41,11 +43,10 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     context = LocalContext.current
+                    Box(modifier = Modifier.padding(innerPadding))    {
+                        AppNavigation()
+                    }
 
-                    DriversList()
-
-                    // FruitsList(context)
-                    //NavExample()
                 }
             }
         }
@@ -53,49 +54,34 @@ class MainActivity : ComponentActivity() {
 }
 
 
-data object Home
-data class Product(val id: String)
+data object DriverListScreen
+data class DriverDetailsScreen(val driverNumber: Int)
 
-
-data class About(val message: String)
 
 @Composable
-fun NavExample() {
+fun AppNavigation() {
 
-    val backStack = remember { mutableStateListOf<Any>(Home) }
+    val backStack = remember { mutableStateListOf<Any>(DriverListScreen) }
 
     NavDisplay(
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
-        entryProvider = { obj->
-            when (obj) {
-                is Home -> NavEntry(obj) {
+        entryProvider = { destination ->
+            when (destination) {
 
-                    Column {
-                        Button(onClick = {
-                            backStack.add(Product("123"))
-                        }) {
-                            Text("Click to navigate")
+                is DriverListScreen -> NavEntry(destination){
+                    DriversList(
+                        onDriverClick = { driverNumber ->
+                            backStack.add(DriverDetailsScreen(driverNumber))
                         }
-
-                        Button(onClick = {
-                            backStack.add(About("About page"))
-                        }) {
-                            Text("Click to navigate to about")
-                        }
-                    }
+                    )
                 }
 
-                is Product -> NavEntry(obj) {
-                    ContentBlue("Product ${obj.id} ")
-                }
-                is About -> NavEntry(obj){
-                    Text(obj.message)
-                    Button(onClick = {
-                          backStack.removeLastOrNull()
-                    }) {
-                        Text("back")
-                    }
+                is DriverDetailsScreen -> NavEntry(destination){
+                    DriverDetails(
+                        driverNumber = destination.driverNumber,
+                        onBack = { backStack.removeLastOrNull()}
+                    )
                 }
 
 
@@ -105,67 +91,7 @@ fun NavExample() {
     )
 }
 
-@Composable
-fun ContentBlue(x0: String) {
-    Text(x0)
-}
 
-
-@Composable
-fun ContentGreen(x0: String, content: @Composable () -> Unit) {
-    Text(x0)
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TransportTheme {
-
-        Row {
-            Greeting("Android")
-            Text("Labas")
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewNavigation() {
-
-    val list = listOf("Button1", "Home", "Shop", "Deals")
-
-    TransportTheme {
-        CustomNavigation(list)
-    }
-}
-
-
-@Composable
-fun CustomNavigation(menuItems: List<String>) {
-
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
-    ) {
-        items(menuItems) { item ->
-            Button(onClick = {
-                println(item)
-            }) {
-                Text(item)
-            }
-        }
-    }
-
-}
 
 
 

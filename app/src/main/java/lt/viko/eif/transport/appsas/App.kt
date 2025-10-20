@@ -1,6 +1,7 @@
 package lt.viko.eif.transport.appsas
 
 import android.app.Application
+import lt.viko.eif.transport.appsas.di.authModule
 import lt.viko.eif.transport.appsas.di.fruitModule
 import lt.viko.eif.transport.appsas.di.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,8 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 fruitModule,
-                networkModule
+                networkModule,
+                authModule
             )
         }
     }
