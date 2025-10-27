@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lt.viko.eif.transport.appsas.data.F1DriversRepository
-import lt.viko.eif.transport.appsas.data.F1DriversResponse
-import lt.viko.eif.transport.appsas.view.FruitState
+import lt.viko.eif.transport.appsas.data.dto.F1DriversResponse
 
+
+// FRONTEND SERVICE
 class DriversViewModel(private val repository: F1DriversRepository) : ViewModel() {
 
     var state by mutableStateOf(DriversState())

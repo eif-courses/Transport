@@ -10,6 +10,8 @@ import lt.viko.eif.transport.appsas.data.AuthRepositoryImpl
 import lt.viko.eif.transport.appsas.data.F1Api
 import lt.viko.eif.transport.appsas.data.F1DriversRepository
 import lt.viko.eif.transport.appsas.data.F1DriversRepositoryImpl
+import lt.viko.eif.transport.appsas.view.auth.AuthViewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -86,6 +88,8 @@ single<TokenStorage> {
     single<AuthRepository> {
         AuthRepositoryImpl(api = get(), tokenStorage = get())
     }
+
+    viewModelOf(::AuthViewModel)
 
 
 

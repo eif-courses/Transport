@@ -28,6 +28,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import lt.viko.eif.transport.appsas.ui.theme.TransportTheme
 import lt.viko.eif.transport.appsas.view.FruitsList
+import lt.viko.eif.transport.appsas.view.auth.SignInScreen
 import lt.viko.eif.transport.appsas.view.drivers.DriverDetails
 import lt.viko.eif.transport.appsas.view.drivers.DriversList
 
@@ -42,10 +43,12 @@ class MainActivity : ComponentActivity() {
             TransportTheme {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    context = LocalContext.current
-                    Box(modifier = Modifier.padding(innerPadding))    {
-                        AppNavigation()
-                    }
+
+                    SignInScreen()
+//                    context = LocalContext.current
+//                    Box(modifier = Modifier.padding(innerPadding))    {
+//                        AppNavigation()
+//                    }
 
                 }
             }

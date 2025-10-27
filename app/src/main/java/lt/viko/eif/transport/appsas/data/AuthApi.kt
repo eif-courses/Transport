@@ -4,6 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -29,8 +30,6 @@ fun User.hasBattleNetAccess(): Boolean {
 fun User.getAuthProvider(): String {
     return authProvider // Use the explicit field
 }
-
-
 
 
 
@@ -136,6 +135,6 @@ interface AuthApi {
     suspend fun signIn(@Body request: SignInRequest): TokenResponse
 
     @GET("api/v1/auth/profile")
-    suspend fun getCurrentUser() : UserResponse
+    suspend fun getCurrentUser(@Header("Authorization") authHeader: String) : UserResponse
 
 }

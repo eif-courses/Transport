@@ -1,6 +1,7 @@
 package lt.viko.eif.transport.appsas.data
 
 import lt.viko.eif.transport.appsas.di.TokenStorage
+import lt.viko.eif.transport.appsas.di.authModule
 
 class AuthRepositoryImpl(
     private val api: AuthApi,
@@ -12,22 +13,41 @@ class AuthRepositoryImpl(
         email: String,
         password: String
     ): TokenData {
-        TODO("Not yet implemented")
+
+        val request = SignInRequest(email = email, password = password)
+        val response = api.signIn(request)
+        val tokenData = response.toDomainModel()
+
+        tokenStorage.saveToken(tokenData.accessToken)
+
+        return tokenData;
+
     }
 
     override suspend fun signOut() {
-        TODO("Not yet implemented")
+        tokenStorage.clearToken()
     }
 
-    override suspend fun getCurrentUser(): String? {
-        TODO("Not yet implemented")
+    override suspend fun getCurrentUser(): User? {
+
+        val token = tokenStorage.getToken()
+
+        val response: UserResponse = api.getCurrentUser("Bearer $token")
+
+        val result = response.user.toDomainModel(
+            authProvider = response.authProvider,
+            hasBattleNet = response.hasBattlenet
+        )
+
+        return result
+
     }
 
     override suspend fun getCurrentToken(): String? {
-        TODO("Not yet implemented")
+        return tokenStorage.getToken()
     }
 
     override suspend fun isUserSignedIn(): Boolean {
-        TODO("Not yet implemented")
+        return tokenStorage.hasValidToken()
     }
 }
