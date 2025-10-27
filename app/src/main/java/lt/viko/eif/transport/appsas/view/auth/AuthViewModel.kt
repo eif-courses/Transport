@@ -9,9 +9,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lt.viko.eif.transport.appsas.data.AuthRepository
 import lt.viko.eif.transport.appsas.data.User
+import lt.viko.eif.transport.appsas.di.TokenStorage
 
 class AuthViewModel(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val storage: TokenStorage
 ) : ViewModel() {
 
     var uiState by mutableStateOf(SignInState())
@@ -25,10 +27,12 @@ class AuthViewModel(
 
             uiState = uiState.copy(
                 isLoading = false,
-                user = result.user
+                user = result.user,
+                token = storage.getToken()
             )
 
         }
+
     }
 
 
@@ -39,5 +43,6 @@ class AuthViewModel(
 data class SignInState(
     val isLoading: Boolean = false,
     val error :String? = null,
-    val user : User? = null
+    val user : User? = null,
+    val token: String? = null
 )

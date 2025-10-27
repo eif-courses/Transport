@@ -16,11 +16,15 @@ fun SignInScreen(
     Column {
         Row {
             Button(onClick = {
-                viewModel.signIn("aweaw","waeawe")
+                viewModel.signIn("petras@gmail.com","Kolegija1@")
             }){
                 Text("Sing In")
             }
+
+            Text("res: "+viewModel.uiState.token)
         }
+
+
     }
 
 
